@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}Tus datos guardados son:{% endblock %}
+{% block content %}
+<h2>Tus Datos</h2>
+<ul>
+    <li><strong>Nombre:</strong> {{ submission.name }}</li>
+    <li><strong>Correo Electrónico:</strong> {{ submission.email }}</li>
+    <li><strong>Número de Teléfono:</strong> {{ submission.number }}</li>
+    <li><strong>Estado:</strong> {{ submission.state }}</li>
+    <li><strong>Fecha y Hora:</strong> {{ submission.timestamp }}</li>
+</ul>
+<a href="{{ url_for('buyer') }}" class="btn btn-secondary">Volver</a>
+{% endblock %}

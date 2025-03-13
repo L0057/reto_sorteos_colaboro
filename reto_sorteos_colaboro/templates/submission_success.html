@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Datos Enviados{% endblock %}
+{% block content %}
+<h2>¡Datos enviados con éxito!</h2>
+<p>Tu QR único (contenido):</p>
+<p><strong>{{ qr_content }}</strong></p>
+<p>Imagen del QR:</p>
+<img src="{{ url_for('static', filename='qr_codes/' ~ qr_filename) }}" alt="QR Code">
+<a href="{{ url_for('collaborator_form') }}" class="btn btn-secondary mt-3">Enviar otro</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Escanear QR{% endblock %}
+{% block content %}
+<p>Escanea tu QR:</p>
+<div id="qr-reader" style="width:300px;"></div>
+<p><a href="{{ url_for('buyer') }}">Volver</a></p>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+  function onScanSuccess(decodedText, decodedResult) {
+    // Redirige pasando el contenido del QR por GET
+    window.location.href = "{{ url_for('buyer') }}?qr_content=" + encodeURIComponent(decodedText);
+  }
+  let html5QrCode = new Html5Qrcode("qr-reader");
+  html5QrCode.start(
+    { facingMode: "environment" },
+    { fps: 10, qrbox: 250 },
+    onScanSuccess
+  ).catch(err => {
+    console.error(err);
+  });
+</script>
+{% endblock %}

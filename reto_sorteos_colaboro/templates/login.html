@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Iniciar sesión. {% endblock %}
+{% block content %}
+<h2>Por favor inicie sesión, colaborador.</h2>
+<form action="{{ url_for('login') }}" method="POST">
+  <div class="mb-3">
+    <label for="email" class="form-label">Correo Electrónico</label>
+    <input type="email" class="form-control" id="email" name="email" required>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Contraseña</label>
+    <input type="password" class="form-control" id="password" name="password" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Entrar</button>
+</form>
+{% endblock %}

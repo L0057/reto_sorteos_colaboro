@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Bienvenido, colaborador! Aquí puedes registrar los datos.{% endblock %}
+{% block content %}
+<h2>Por favor, ingrese los datos </h2>
+<form action="{{ url_for('submit_collaborator') }}" method="POST">
+  <div class="mb-3">
+    <label for="name" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="name" name="name" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Correo Electrónico</label>
+    <input type="email" class="form-control" id="email" name="email" required>
+  </div>
+  <div class="mb-3">
+    <label for="number" class="form-label">Número de Teléfono</label>
+    <input type="text" class="form-control" id="number" name="number" required>
+  </div>
+  <div class="mb-3">
+    <label for="state" class="form-label">Estado de Procedencia</label>
+    <input type="text" class="form-control" id="state" name="state" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+<a href="{{ url_for('logout') }}" class="btn btn-secondary mt-3">Cerrar sesión</a>
+{% endblock %}

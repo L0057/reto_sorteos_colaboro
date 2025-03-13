@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard - Datos Registrados{% endblock %}
+{% block content %}
+<h2>Dashboard - Datos Registrados</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Número</th>
+      <th>Estado</th>
+      <th>Fecha/Hora</th>
+      <th>QR (Imagen)</th>
+      <th>Contenido QR</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for submission in submissions %}
+    <tr>
+      <td>{{ submission.id }}</td>
+      <td>{{ submission.name }}</td>
+      <td>{{ submission.email }}</td>
+      <td>{{ submission.number }}</td>
+      <td>{{ submission.state }}</td>
+      <td>{{ submission.timestamp }}</td>
+      <td>
+        <img src="{{ url_for('static', filename='qr_codes/' ~ submission.qr_code_filename) }}" alt="QR Code" style="max-width: 100px;">
+      </td>
+      <td>{{ submission.qr_content }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{{ url_for('collaborator_form') }}" class="btn btn-secondary">Volver</a>
+{% endblock %}

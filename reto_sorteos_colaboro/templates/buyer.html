@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block title %}Hola, colaborador{% endblock %}
+{% block content %}
+<h2>Aquí puedes acceder a los datos</h2>
+<p>Escanea el QR que contiene tus datos o ingresa el contenido a continuación:</p>
+<form action="{{ url_for('buyer') }}" method="POST">
+    <div class="mb-3">
+        <label for="qr_content" class="form-label">Contenido del QR</label>
+        <input type="text" class="form-control" id="qr_content" name="qr_content" placeholder="Ej: SorteosTec-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Ver mis datos</button>
+</form>
+
+<button class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#qrScannerModal">Escanear QR</button>
+
+<!-- Modal para escanear QR -->
+<div class="modal fade" id="qrScannerModal" tabindex="-1" aria-labelledby="qrScannerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="qrScannerModalLabel">Escanea tu QR</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div id="qr-reader" style="width: 100%;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Incluimos html5-qrcode y el script para iniciar el escáner -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+  let html5QrcodeScanner;
+  function onScanSuccess(decodedText, decodedResult) {
+    document.getElementById('qr_content').value = decodedText;
+    html5QrcodeScanner.clear().then(_ => {
+      var modalEl = document.getElementById('qrScannerModal');
+      var modal = bootstrap.Modal.getInstance(modalEl);
+      modal.hide();
+    }).catch(error => {
+      console.error('Error al detener el escaneo', error);
+    });
+  }
+
+  document.getElementById('qrScannerModal').addEventListener('shown.bs.modal', function () {
+    html5QrcodeScanner = new Html5Qrcode("qr-reader");
+    html5QrcodeScanner.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 250 },
+      onScanSuccess
+    ).catch(err => {
+      console.error('Error al iniciar el escáner', err);
+    });
+  });
+
+  document.getElementById('qrScannerModal').addEventListener('hidden.bs.modal', function () {
+    if (html5QrcodeScanner) {
+      html5QrcodeScanner.clear().catch(err => {
+        console.error('Error al detener el escáner', err);
+      });
+    }
+  });
+</script>
+{% endblock %}

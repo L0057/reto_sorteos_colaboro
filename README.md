@@ -80,7 +80,7 @@ Para acceder a la página web, sigue estos pasos:
 - Permite revisar la información almacenada de cada comprador.
 - Puede filtrar los datos por nombre, correo o estado de procedencia.
 
-### 4. Escaneo de QR (Para Compradores)
+### 4. Escaneo de QR
 - Los compradores pueden escanear su código QR.
 - Al escanearlo, se mostrará su información en una ventana emergente con los datos en formato de viñetas.
 
@@ -90,7 +90,7 @@ Para acceder a la página web, sigue estos pasos:
 
 ## Inicio de Sesión (Log In)
 
-### Credenciales de Acceso para Colaboradores
+### Credenciales de Acceso para los Colaboradores
 - **Correo 1:** `colaborador@example.com`
 - **Contraseña 1:** `password1`
 
